@@ -1,3 +1,5 @@
+//class that creates html elements and returns them for use in document
+
 class Display{
     constructor(){}
 
@@ -9,6 +11,7 @@ class Display{
         `;
     signOutButton = `<div id="sign-out">Sign Out</div>`;
 
+    //insert news objects into templates and return
     displayNews(news){
         const articles =  news.map((article)=>{
             return (`<div class="article">
@@ -24,6 +27,7 @@ class Display{
         return `<div class="news">${articles}</div>`
     }
 
+    //show user name and image
     displayUserData(user){
         return `
             <div class="usr-photo">
@@ -32,6 +36,7 @@ class Display{
             <h2>Hi ${user.displayName.split(" ")[0]}</h2>`
     }
 
+    //break down concert objects into a template
     displayConcerts(concerts){
         const concertList =  concerts.map((concert)=>{
             const concertDate = new Date(Date.parse(concert.start));
@@ -50,6 +55,7 @@ class Display{
         return `<div class="concert-header">Concerts</div><div class="concerts">${concertList}</div>`
     }
 
+    //return list of artist buttons based on artist name provided
     displayFavs(artists){
         const faves =  artists.map((artist)=>{
             return (`<li class="fav-artist">
@@ -64,6 +70,7 @@ class Display{
         return `<div class="concert-header">Your Favorites</div><ul class="faves">${faves}</ul>`
     }
 
+    //return button based on artist name provided
     displayCurrent(artist){
         return`     
         <button class="add-fav-button" value="${artist.name}">
@@ -71,6 +78,7 @@ class Display{
         </button>`
     }
 
+    //create artist playlist
     displayDeezer(artist){
         return `<iframe title="deezer-widget" src="https://widget.deezer.com/widget/auto/artist/${artist.id}/top_tracks" allow="encrypted-media; clipboard-write"></iframe>`;
     }

@@ -1,3 +1,5 @@
+//class that provides artist id and artist info based on api call
+
 class Deezer{
     
     constructor(){}
@@ -12,6 +14,7 @@ class Deezer{
 
     topArtists = [];
 
+    //user search string to get artist id, then get artist object and return it
     searchArtist = async (artist) => {
         this.options.params = {q: artist};
         this.options.url = 'https://deezerdevs-deezer.p.rapidapi.com/search';
@@ -23,6 +26,8 @@ class Deezer{
         
         return response.data;
     }
+
+    //middleware to handle async
     searchTopArtist = async (artist) => {
         const response = await this.searchArtist(artist);
         this.topArtists.push(response);

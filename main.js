@@ -9,7 +9,7 @@ let myChart, favs;
 
 deezer.getTopArtists();
 
-//search for news and display in correct boxes
+//search for news, concerts etc. and display in correct boxes
 const setNews = (offset = 0, e = null) =>{
     let searchString = "";
     if(e !== null){
@@ -22,6 +22,7 @@ const setNews = (offset = 0, e = null) =>{
     showConcerts(searchString, offset);
 }
 
+//show default or artist playlist based on scenareo
 const showArtistMusic = async (searchString) => {
     const artist = await deezer.searchArtist(searchString);
     if(firebase.favs && firebase.favs.indexOf(artist.name) < 0){
@@ -29,17 +30,21 @@ const showArtistMusic = async (searchString) => {
     }
     document.querySelector('.music-player').innerHTML = display.displayDeezer(artist)
 }
+
+//helper function that actually gets and formats news
 const showNews = async (searchString, offset) => {
     const generalNews = await news.getMusicNews(searchString === "" ? "music news":searchString, offset);
     showChart(searchString);
     document.querySelector('.music-news').innerHTML = display.displayNews(generalNews.value);
 }
 
+//helper function that actually gets and formats concerts
 const showConcerts = async (searchString, offset) => {
     const concertList = await concerts.getConcerts(searchString, offset);
     document.querySelector('.music-events').innerHTML = display.displayConcerts(concertList.results)
 }
 
+//display artist popularity chart
 const showChart = async(artist = "") => {
     const artistsToDisplay = [...deezer.topArtists], labels = [], followerCounts = [], colors = [];
     if(artist !== ""){
@@ -80,11 +85,13 @@ const showChart = async(artist = "") => {
       myChart = new Chart(document.getElementById('myChart'), config);
 }
 
+//start up firebase
 const initUser = async () => {
     await firebase.initializeFirebase()
     handleStateChange();
 }
 
+//checks if user is logged in or not and refreshes ui based on that
 const handleStateChange = async (request) => {
     if(request === 'sign-out'){
         await firebase.signUserOut();
@@ -105,8 +112,10 @@ const handleStateChange = async (request) => {
     }
 }
 
+//event listeners
 document.addEventListener('DOMContentLoaded', () => {
 
+    //initial calls for page load
     setNews(0);
     initUser();
 
@@ -128,6 +137,5 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('#current-artist').innerHTML = "";
             handleStateChange()
         }
-        //firebase.addFave(searchString)
     })
 })

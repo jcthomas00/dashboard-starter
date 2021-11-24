@@ -1,4 +1,5 @@
-class News{
+//class to interact with predictHQ's events api to get concert info
+class Concerts{
     
     constructor(){}
 
@@ -29,4 +30,4 @@ class News{
 
 }
 
-export default News;
+export default Concerts;

@@ -1,3 +1,5 @@
+//Firebase class to handle login, register with Firebase Auth and DB with Firestore
+
 // Import the needed firebase functions from their respective SDKs
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.1/firebase-app.js";
 import { getAuth, signOut, signInWithPopup,getRedirectResult, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.4.1/firebase-auth.js";
@@ -23,8 +25,8 @@ class Firebase{
         this.provider = new GoogleAuthProvider();
     }
 
+    //startup Firebase Auth and Firestore
     initializeFirebase = async () => {
-
         this.auth = await getAuth();
         this.user = this.auth.currentUser;
         
@@ -32,11 +34,8 @@ class Firebase{
         this.db = getFirestore(this.app);
     }
 
+    //check if user in DB, add if they're not there and return their faves
     getUserData = async () => {
-        // const querySnapshot = await getDocs(collection(this.db, "users", this.user.email));
-        // querySnapshot.forEach((doc) => {
-        //     console.log(doc.data());
-        // });
         const docRef = doc(this.db, "users", this.user.email);
         const docSnap = await getDoc(docRef);
 
@@ -52,16 +51,19 @@ class Firebase{
             }
     }
 
+    //update user data
     removeFave = (artist) => {
         this.favs = [...this.favs.filter(fav => fav !== artist)]
         this.writeData()
     }
 
+    //update user data
     addFave = (artist) => {
         this.favs.push(artist);
         this.writeData()
     }
 
+    //write data to firestore
     writeData = async () => {
         //Firestore Write Code
         try {
@@ -74,6 +76,7 @@ class Firebase{
           }
     }
 
+    //sign out user
     signUserOut = async () => {
         try {
             await signOut(this.auth)
@@ -85,6 +88,7 @@ class Firebase{
         }
     }
 
+    //sign in user
     signIn = async () => {
         try{
             const result = await signInWithPopup(this.auth, this.provider);
@@ -100,34 +104,7 @@ class Firebase{
                 return error;
             }
         }
-        //   // Handle Errors here.
-        //   const errorCode = error.code;
-        //   const errorMessage = error.message;
-        //   // The email of the user's account used.
-        //   const email = error.email;
-        //   // The AuthCredential type that was used.
-        //   const credential = GoogleAuthProvider.credentialFromError(error);
-        //   // ...
-        // });
     }
-
-    // userStatusChanged = () => {
-    //     onAuthStateChanged(this.auth, () => {
-    //         if (this.user) {
-    //           // User is signed in, see docs for a list of available properties
-    //           // https://firebase.google.com/docs/reference/js/firebase.User
-    //           const uid = user.uid;
-    //           document.querySelector('#firebaseui-auth-container').innerHTML = 
-    //               `<button id="sign-out">Sign Out ${user.displayName}</button>`
-    //               console.log(user);
-    //           // ...
-    //         } else {
-    //           // User is signed out
-    //           // ...
-    //           document.querySelector('#firebaseui-auth-container').innerHTML = `<button id="sign-in">Sign In</button>`
-    //         }
-    //     });
-    // }
 
 }
 

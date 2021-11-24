@@ -3,6 +3,8 @@
 
 :root{
     --background-color: rgba(255, 255, 255, .85);
+    --pink: #fd264f;
+    --grey: #333;
 }
 
 *{
@@ -20,22 +22,7 @@ h1 {
     margin: 5px 0 20px;
     line-height: 20px;
 }
-img {
-    max-width: 100%
-}
-#user-info, #brand {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 10px;
-}
 
-#usr-data {
-    display: none;
-}
-#brand {
-    border-bottom: 2px solid #fd264f;
-    margin: 10px 0;
-}
 .container{
     display: flex;
     flex-wrap: wrap;
@@ -44,7 +31,22 @@ img {
     row-gap:20px;
     column-gap: 10px;
 }
-
+img {
+    max-width: 100%
+}
+/* Side styles */
+#user-info, #brand {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+}
+#usr-data {
+    display: none;
+}
+#brand {
+    border-bottom: 2px solid var(--pink);
+    margin: 10px 0;
+}
 #firebaseui-auth-container{
     text-align: center;
     width: 100%;
@@ -53,8 +55,8 @@ img {
     position: relative;
     display: inline-block;
     padding: 0.8em;
-    color: #333;
-    border: 1px solid #333;
+    color: var(--grey);
+    border: 1px solid var(--grey);
     border-radius: 3px;
     line-height: 1.15384615;
     text-align: center;
@@ -99,12 +101,12 @@ input[type="submit"] {
     margin: 0px 10px;
     border-radius: 10px;
     text-transform: uppercase;
-    background-color: #fd264f;
+    background-color: var(--pink);
     color: #fff;
     border: none;
 }
 button.add-fav-button {
-    border: 1px solid #333;
+    border: 1px solid var(--grey);
     display: inline-block;
     margin: 5px;
     padding: 10px;
@@ -112,23 +114,24 @@ button.add-fav-button {
 }
 li.fav-artist {
     list-style: none;
-    border: 1px solid #333;
+    border: 1px solid var(--grey);
     display: inline-block;
     margin: 5px;
     padding: 5px;
     border-radius: 25px;
 }
-
+div#fav-artists {
+    width: 100%;
+}
 ul.faves {
     padding: 0;
 }
-
 li.fav-artist button {
     border: 0;
     background: none;
     padding: 2px;
 }
-
+/* main content styles */
 main{
     display: flex;
     flex-wrap: wrap;
@@ -136,8 +139,6 @@ main{
     column-gap: 10px;
     flex: 100%;
 }
-
-
 .music-player{
     flex: 100%;
 }
@@ -172,7 +173,7 @@ h3 {
 h3 a {
     font-size: 0.9rem;
     text-decoration: none;
-    color: #000;
+    color: var(--grey);
 }
 .article-image img {
     justify-content: center;
@@ -194,12 +195,12 @@ h3 a {
 }
 
 .concert-date {
-    border: 1px solid #333;
+    border: 1px solid var(--grey);
     border-radius: 5px;
     min-width: 75px;
 }
 span.year {
-    background-color: #333;
+    background-color: var(--grey);
     color: #fff;
     font-weight: bold;
     text-transform: uppercase;
@@ -212,7 +213,7 @@ span.date {
     text-align: center;
     font-weight: bold;
     font-size: 2rem;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid var(--grey);
     padding: 9px;
     line-height: 2rem;
 }
@@ -261,10 +262,10 @@ select:focus {
     .tabs [class^="tab"] [type="radio"]:hover, .tabs [class^="tab"] [type="radio"]:focus,
     .tabs [class*=" tab"] [type="radio"]:hover,
     .tabs [class*=" tab"] [type="radio"]:focus {
-      border-bottom: 1px solid #fd264f; }
+      border-bottom: 1px solid var(--pink); }
     .tabs [class^="tab"] [type="radio"]:checked,.concert-header,
     .tabs [class*=" tab"] [type="radio"]:checked {
-      border-bottom: 2px solid #fd264f; }
+      border-bottom: 2px solid var(--pink); }
     .tabs [class^="tab"] [type="radio"]:checked + div,
     .tabs [class*=" tab"] [type="radio"]:checked + div {
       opacity: 1; }
