@@ -145,6 +145,7 @@ main{
     width: 100%;
     height: 300px;
     border-radius: 25px;
+    border: 0;
 }
 aside, .music-news, .music-events, .tab-content, canvas#myChart{
     background-color: var(--background-color);

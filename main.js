@@ -93,11 +93,9 @@ const handleStateChange = async (request) => {
     }
     if(firebase.user !== null){
         document.querySelector('#firebaseui-auth-container').innerHTML = display.signOutButton;
-        console.log(firebase.user)
         document.querySelector('#usr-data').innerHTML = display.displayUserData(firebase.user);
         //favs = await firebase.getUserData();
         if(firebase.favs){
-            console.log(firebase.favs)
             document.querySelector('#fav-artists').innerHTML = display.displayFavs(firebase.favs);
         }
     }else{

@@ -72,7 +72,7 @@ class Display{
     }
 
     displayDeezer(artist){
-        return `<iframe title="deezer-widget" src="https://widget.deezer.com/widget/auto/artist/${artist.id}/top_tracks" frameborder="0" allowtransparency="true" allow="encrypted-media; clipboard-write"></iframe>`;
+        return `<iframe title="deezer-widget" src="https://widget.deezer.com/widget/auto/artist/${artist.id}/top_tracks" allow="encrypted-media; clipboard-write"></iframe>`;
     }
 
 }
